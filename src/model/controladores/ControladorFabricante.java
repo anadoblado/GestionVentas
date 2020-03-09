@@ -9,6 +9,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
 import model.Fabricante;
 
 
@@ -18,11 +24,26 @@ public class ControladorFabricante {
 	/**
 	 * 
 	 * @return
-	 * @throws ErrorBBDDException
 	 */
 	public static List<Fabricante> getAll() {
-		List<Fabricante> fabricantes = new ArrayList<Fabricante>();
-		Connection conn = null;
+		EntityManagerFactory entityManagerFactoty = Persistence.createEntityManagerFactory("GestionVentas");
+		
+		EntityManager em = entityManagerFactoty.createEntityManager();
+		
+		Query q = em.createNativeQuery("SELECT * FROM fabricante;", Fabricante.class);
+				//("Fabricante.findAll");
+				//("SELECT * FROM fabricante;", Fabricante.class);
+		
+		
+		List<Fabricante> fabricantes = (List<Fabricante>)q.getResultList();
+		
+		for (Fabricante fabricante : fabricantes) {
+			System.out.println("Fabricante: " + fabricante.getId() + " Cif: " + fabricante.getCif() + " Nombre: " + fabricante.getNombre());
+		}
+		
+		em.close();
+		
+		//Connection conn = null;
 		
 //		try {
 //			conn = ConnectionManagerV2.getConexion();
@@ -92,8 +113,31 @@ public class ControladorFabricante {
 	 * @param fab
 	 * @throws ErrorBBDDException
 	 */
-	public static void almacenarNuevo(Fabricante fab) {
-		Connection conn = null;
+	public static void almacenarNuevo() {
+		
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("GestionVentas");
+		
+		EntityManager em = entityManagerFactory.createEntityManager();
+		
+		Fabricante fab = new Fabricante();
+		fab.setCif(fab.getCif());
+		fab.setNombre(fab.getNombre());
+		
+		em.getTransaction().begin();
+		em.persist(fab);
+		em.getTransaction().commit();
+		
+		TypedQuery<Fabricante> q = em.createQuery("SELECT f FROM Fabricante as f", Fabricante.class);
+		
+		List<Fabricante> fabricantes = q.getResultList();
+		
+		for (Fabricante fabricante : fabricantes) {
+			System.out.println("Fabricante: " + fabricante.getId() + " CIF: " + fabricante.getCif() + " Nombre: " + fabricante.getNombre() );
+			
+		}
+		em.close();
+		
+		//Connection conn = null;
 //		try {
 //			conn = ConnectionManagerV2.getConexion();
 //			PreparedStatement ps = conn.prepareStatement("INSERT INTO fabricante (id, cif, nombre) VALUES (?, ?, ?)");

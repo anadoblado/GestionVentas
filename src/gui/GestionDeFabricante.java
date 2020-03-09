@@ -37,15 +37,14 @@ public class GestionDeFabricante {
 	/**
 	 * 
 	 * @param pausaFinal
-	 * @throws ErrorBBDDException
 	 */
 	public static void listado(boolean pausaFinal) {
 		List<Fabricante> fabricantes = ControladorFabricante.getAll();
 		System.out.println("\n\tListado de fabricantes: \n");
-		for (Fabricante fab : fabricantes) {
-			System.out.println("\t" + fab.toString());
-			
-		}
+//		for (Fabricante fab : fabricantes) {
+//			System.out.println("\t" + fab.toString());
+//			
+//		}
 		if (pausaFinal) {
 			System.out.println("\n\tPulse 'Intro' para continuar");
 			Utils.pausa();
@@ -65,7 +64,8 @@ public class GestionDeFabricante {
 		System.out.println("\nIntroduce el 'Nombre' del fabricante");
 		fab.setNombre(Utils.getStringConsola());
 		
-		ControladorFabricante.almacenar(fab);
+		ControladorFabricante.almacenarNuevo();
+		//almacenar(fab);
 		
 		System.out.println("\n\tFabricante insertado correctamente. Pulse 'Intro' para continuar");
 		Utils.pausa();
