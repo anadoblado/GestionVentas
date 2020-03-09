@@ -69,12 +69,13 @@ public class ControladorFabricante {
 	
 	
 	public static void almacenar (Fabricante fabricante) {
-		if (get(fabricante.getId())!= null) {
+		/*if (get(fabricante.getId())!= null) {
 			almacenarModificado(fabricante);
 		}
-		else {
+		*/
+		//else {
 			almacenarNuevo(fabricante);
-		}
+		//}
 	}
 	
 	/**
@@ -164,7 +165,22 @@ public class ControladorFabricante {
 	 * @throws ErrorBBDDException
 	 */
 	public static void almacenarModificado(Fabricante fab) {
-		Connection conn = null;
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("GestionVentas");
+		EntityManager em = entityManagerFactory.createEntityManager();
+		TypedQuery<Fabricante> q = em.createQuery("SELECT f FROM Fabricante as f where f.cif = '12345678A'", Fabricante.class);
+		
+		List<Fabricante> fabricantes = q.getResultList();
+		
+		em.getTransaction().begin();
+		for (Fabricante fabricante : fabricantes) {
+			fabricante.setNombre("ModificadoPorMi");
+			em.persist(fabricante);
+		}
+		em.getTransaction().commit();
+		em.close();
+		
+		
+		//Connection conn = null;
 //		try {
 //			conn = ConnectionManagerV2.getConexion();
 //			PreparedStatement ps = conn.prepareStatement("update fabricante set cif=?, nombre=?, where id=?");
@@ -193,6 +209,20 @@ public class ControladorFabricante {
 	 * @throws ErrorBBDDException
 	 */
 	public static void eliminar (Fabricante fab) {
+		
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("GestionVentas");
+		EntityManager em = entityManagerFactory.createEntityManager();
+		TypedQuery<Fabricante> q = em.createQuery("SELECT f FROM Fabricante as where f.nombre = 'roro'", Fabricante.class);
+		
+		List<Fabricante> fabricantes = q.getResultList();
+		
+		em.getTransaction().begin();
+		for (Fabricante fabricante : fabricantes) {
+			em.remove(fabricante);
+		}
+		em.getTransaction().commit();
+		em.close();
+		
 /*		Connection conn = null;
 		
 		try {

@@ -79,23 +79,26 @@ public class GestionDeFabricante {
 	private static void modificacion() {
 		System.out.println("\n\tModificación de fabricante\n");
 		
-		Fabricante fab = seleccionarPorElUsuario();
+		Fabricante fab = new Fabricante();
+		ControladorFabricante.almacenarModificado(fab);
 		
-		if (fab != null) {
-			System.out.println("\nIntroduzca 'CIF' del fabricante ('Intro' para modificar): ");
-			String str = Utils.getStringConsola();
-			if(!str.equals("")) fab.setCif(str);
-			
-			System.out.println("\nIntroduzca 'Nombre' del fabricante ('Intro' para modificar): ");
-			str = Utils.getStringConsola();
-			if (!str.equals("")) fab.setNombre(str);
-			
-			ControladorFabricante.almacenar(fab);
-			
-			System.out.println("\n\tModificado correctamente. Pulse 'Intro' para continuar ");
-			Utils.pausa();
-		}
-		
+//		Fabricante fab = seleccionarPorElUsuario();
+//		
+//		if (fab != null) {
+//			System.out.println("\nIntroduzca 'CIF' del fabricante ('Intro' para modificar): ");
+//			String str = Utils.getStringConsola();
+//			if(!str.equals("")) fab.setCif(str);
+//			
+//			System.out.println("\nIntroduzca 'Nombre' del fabricante ('Intro' para modificar): ");
+//			str = Utils.getStringConsola();
+//			if (!str.equals("")) fab.setNombre(str);
+//			
+//			ControladorFabricante.almacenar(fab);
+//			
+//			System.out.println("\n\tModificado correctamente. Pulse 'Intro' para continuar ");
+//			Utils.pausa();
+//		}
+//		
 	}
 	
 	/**
@@ -132,17 +135,20 @@ public class GestionDeFabricante {
 	private static void baja() {
 		System.out.println("\n\tEliminar registro de fabricantes");
 		
-		Fabricante fab = seleccionarPorElUsuario();
+		Fabricante fab = new Fabricante();
+		ControladorFabricante.eliminar(fab);
 		
-		if(fab != null) {
-			System.out.println("\n\t¿Realmente quiere eliminar el registro? (S/N)");
-			String str = Utils.getStringConsola();
-			if(str.equalsIgnoreCase("S")) {
-				//ControladorFabricante.eliminar(fab);
-				System.out.println("\n\tEl registro se eliminó correctamente. Pulsa 'Intro' para continuar");
-				Utils.pausa();
-			}
-		}
+//		Fabricante fab = seleccionarPorElUsuario();
+//		
+//		if(fab != null) {
+//			System.out.println("\n\t¿Realmente quiere eliminar el registro? (S/N)");
+//			String str = Utils.getStringConsola();
+//			if(str.equalsIgnoreCase("S")) {
+//				//ControladorFabricante.eliminar(fab);
+//				System.out.println("\n\tEl registro se eliminó correctamente. Pulsa 'Intro' para continuar");
+//				Utils.pausa();
+//			}
+//		}
 	}
 	
 
