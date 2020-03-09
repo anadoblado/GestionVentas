@@ -64,7 +64,8 @@ public class GestionDeFabricante {
 		System.out.println("\nIntroduce el 'Nombre' del fabricante");
 		fab.setNombre(Utils.getStringConsola());
 		
-		ControladorFabricante.almacenarNuevo();
+		ControladorFabricante.almacenar(fab);
+		//almacenarNuevo(fab);
 		//almacenar(fab);
 		
 		System.out.println("\n\tFabricante insertado correctamente. Pulse 'Intro' para continuar");

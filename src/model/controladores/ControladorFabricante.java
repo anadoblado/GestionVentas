@@ -113,15 +113,15 @@ public class ControladorFabricante {
 	 * @param fab
 	 * @throws ErrorBBDDException
 	 */
-	public static void almacenarNuevo() {
+	public static void almacenarNuevo( Fabricante fab) {
 		
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("GestionVentas");
 		
 		EntityManager em = entityManagerFactory.createEntityManager();
 		
-		Fabricante fab = new Fabricante();
-		fab.setCif(fab.getCif());
-		fab.setNombre(fab.getNombre());
+		Fabricante fab1 = new Fabricante();
+		fab1.setCif(fab.getCif());
+		fab1.setNombre(fab.getNombre());
 		
 		em.getTransaction().begin();
 		em.persist(fab);
