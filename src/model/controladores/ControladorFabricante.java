@@ -21,6 +21,10 @@ import model.Fabricante;
 
 public class ControladorFabricante {
 	
+	public static void obtencionUnaEntidad() {
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("GestionVentas");
+	}
+	
 	/**
 	 * 
 	 * @return
